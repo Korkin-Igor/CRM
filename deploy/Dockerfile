@@ -1,5 +1,7 @@
 FROM php:8.4-fpm-alpine
 
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 RUN apk add --no-cache \
     postgresql-dev \
     git \
@@ -10,9 +12,7 @@ RUN apk add --no-cache \
     zip \
     unzip
 
-RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath zip gd
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN docker-php-ext-install pdo pdo_pgsql
 
 WORKDIR /var/www/html
 
