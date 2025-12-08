@@ -1,0 +1,58 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: crm_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ../project:/var/www/html:delegated
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+    networks:
+      - crm-network
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    container_name: crm_php
+    volumes:
+      - ../project:/var/www/html:delegated
+    depends_on:
+      - db
+    networks:
+      - crm-network
+
+  db:
+    image: postgres:15-alpine
+    container_name: crm_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-crm_db}
+      POSTGRES_USER: ${DB_USERNAME:-crm_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-crm_password}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - crm-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: crm_pgadmin
+    restart: always
+    ports:
+      - "8080:80"
+    networks:
+      - crm-network
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  crm-network:
+    driver: bridge
