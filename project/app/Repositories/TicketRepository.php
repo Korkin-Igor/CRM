@@ -42,6 +42,8 @@ class TicketRepository implements RepositoryInterface
             case 'month':
                 $tickets->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
                 break;
+            default:
+                throw new \InvalidArgumentException('Невалидный период!');
         }
 
         return [
