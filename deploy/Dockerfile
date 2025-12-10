@@ -12,7 +12,7 @@ RUN apk add --no-cache \
     zip \
     unzip
 
-RUN docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install pdo pdo_pgsql exif
 
 WORKDIR /var/www/html
 
