@@ -46,9 +46,9 @@ class TicketRepository implements RepositoryInterface
 
         return [
             'total' => $tickets->count(),
-            'new' => (clone $tickets)->where('status_id', Status::getStatusIdByName('новый'))->count(),
-            'in_work' => (clone $tickets)->where('status_id', Status::getStatusIdByName('в работе'))->count(),
-            'processed' => (clone $tickets)->where('status_id', Status::getStatusIdByName('обработан'))->count(),
+            'new' => Status::where('name', 'новый')->first()->tickets->count(),
+            'in_work' => Status::where('name', 'в работе')->first()->tickets->count(),
+            'processed' => Status::where('name', 'в процессе')->first()->tickets->count(),
         ];
     }
 }
