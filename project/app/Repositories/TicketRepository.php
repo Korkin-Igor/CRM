@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Status;
 use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -45,9 +46,9 @@ class TicketRepository implements RepositoryInterface
 
         return [
             'total' => $tickets->count(),
-            'new' => (clone $tickets)->where('status', 'новый')->count(),
-            'in_work' => (clone $tickets)->where('status', 'в работе')->count(),
-            'processed' => (clone $tickets)->where('status', 'обработан')->count(),
+            'new' => (clone $tickets)->where('status_id', Status::getStatusIdByName('новый'))->count(),
+            'in_work' => (clone $tickets)->where('status_id', Status::getStatusIdByName('в работе'))->count(),
+            'processed' => (clone $tickets)->where('status_id', Status::getStatusIdByName('обработан'))->count(),
         ];
     }
 }
