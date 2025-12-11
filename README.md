@@ -19,6 +19,8 @@ docker compose exec app npm run build
 docker compose exec app php artisan migrate --seed
 ```
 
+## Проект доступен по адресу localhost
+
 ### Данные для менеджера: 
 ##### email: igor@mail.com
 ##### password: 12345678
