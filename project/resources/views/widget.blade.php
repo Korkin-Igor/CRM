@@ -1,7 +1,7 @@
 @extends('layouts.widget')
 
-@section('title', 'Оставить заявку')
-@section('card-title', 'Оставьте заявку')@endsection
+@section('title')Оставить заявку@endsection
+@section('card-title')Оставьте заявку@endsection
 
     @section('content')
         <form id="ticketForm" enctype="multipart/form-data">
