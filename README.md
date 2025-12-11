@@ -12,5 +12,6 @@ docker compose exec app php artisan key:generate
 docker compose exec app composer install
 docker compose exec app composer require spatie/laravel-medialibrary
 docker compose exec app php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider"
+docker compose exec app composer require laravel/ui
 docker compose exec app php artisan migrate --seed
 ```
