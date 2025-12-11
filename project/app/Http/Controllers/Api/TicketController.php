@@ -35,6 +35,32 @@ class TicketController extends Controller
         return response()->json(new TicketResource($ticket));
     }
 
+    public function show(int $id): View
+    {
+        $ticket = $this->ticketService->getTicketForShow($id);
+        return view('admin.tickets.show', compact('ticket'));
+    }
+
+    public function edit(int $id): View
+    {
+        $ticket = $this->ticketService->getTicketForEdit($id);
+        $statuses = $this->ticketService->getAllStatuses();
+        return view('admin.tickets.edit', compact('ticket', 'statuses'));
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $request->validate([
+            'status_id' => 'required|exists:statuses,id',
+        ]);
+
+        $this->ticketService->updateTicketStatus($id, $request->status_id);
+
+        return redirect()
+            ->route('admin.tickets.index')
+            ->with('success', 'Статус заявки обновлён.');
+    }
+
     public function statistics(string $period): JsonResponse
     {
         $stats = $this->ticketService->getStatistics($period);

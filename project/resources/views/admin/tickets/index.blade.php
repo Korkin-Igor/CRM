@@ -60,9 +60,9 @@
                     </td>
                     <td>{{ Str::limit($ticket->text, 50) }}</td>
                     <td>
-                            <span class="badge bg-{{ $ticket->status->name === 'новый' ? 'success' : ($ticket->status->name === 'в работе' ? 'warning' : 'secondary') }}">
-                                {{ $ticket->status->name }}
-                            </span>
+                        <span class="badge bg-{{ $ticket->status->name === 'новый' ? 'success' : ($ticket->status->name === 'в работе' ? 'warning' : 'secondary') }}">
+                            {{ $ticket->status->name }}
+                        </span>
                     </td>
                     <td>{{ $ticket->created_at }}</td>
                     <td>

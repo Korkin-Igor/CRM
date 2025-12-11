@@ -36,7 +36,7 @@ class TicketRepository implements RepositoryInterface
 
     public function show(int $id): ?Ticket
     {
-        return Ticket::find($id);
+        return Ticket::with(['customer', 'status', 'files'])->findOrFail($id);
     }
 
     public function create(array $data): Ticket
@@ -44,9 +44,13 @@ class TicketRepository implements RepositoryInterface
         return Ticket::create($data);
     }
 
-    public function update(int $id, array $data): bool
+    public function updateStatus(int $id, int $statusId): bool
     {
-        return Ticket::find($id)->update($data);
+        return Ticket::where('id', $id)
+            ->update([
+                'status_id' => $statusId,
+                'response_date' => now(),
+            ]);
     }
 
     public function getStatisticsByPeriod(string $period): array
@@ -73,5 +77,10 @@ class TicketRepository implements RepositoryInterface
             'in_work' => Status::where('name', 'в работе')->first()->tickets->count(),
             'processed' => Status::where('name', 'в процессе')->first()->tickets->count(),
         ];
+    }
+
+    public function getAllStatuses()
+    {
+        return Status::all();
     }
 }

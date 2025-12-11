@@ -59,12 +59,24 @@ class TicketService
         return $ticket;
     }
 
-    public function updateStatus(int $id, $request): bool
+    public function getTicketForShow(int $id): Ticket
     {
-        return $this->ticketRepository->update($id, [
-            'status' => $request->status,
-            'manager_response_date' => now(),
-        ]);
+        return $this->ticketRepository->show($id);
+    }
+
+    public function getTicketForEdit(int $id): Ticket
+    {
+        return $this->ticketRepository->show($id);
+    }
+
+    public function getAllStatuses()
+    {
+        return $this->ticketRepository->getAllStatuses();
+    }
+
+    public function updateTicketStatus(int $id, int $statusId): bool
+    {
+        return $this->ticketRepository->updateStatus($id, $statusId);
     }
 
     public function getStatistics($request): array
