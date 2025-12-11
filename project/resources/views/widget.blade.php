@@ -32,7 +32,7 @@
 
             <div class="mb-3">
                 <label for="file" class="form-label">Файлы (до 150 МБ каждый)</label>
-                <input type="file" class="form-control" name="file[]" id="file" multiple accept=".jpg,.jpeg,.png,.gif,.zip,.rar,.7z,.glb,.gltf">
+                <input type="file" class="form-control" name="files[]" id="file" multiple accept=".jpg,.jpeg,.png,.gif,.zip,.rar,.7z,.glb,.gltf">
                 <div class="form-text">Поддерживаются: изображения, архивы, 3D-модели.</div>
                 <div class="text-danger mt-1" id="file-error"></div>
             </div>

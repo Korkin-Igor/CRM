@@ -18,7 +18,7 @@
         <div class="col-md-6">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">@yield('card-title', 'Обратная связь')</h5>
+                    <h5 class="mb-0">@yield('card-title', 'Заголовок')</h5>
                 </div>
                 <div class="card-body">
                     @if(session('success'))
