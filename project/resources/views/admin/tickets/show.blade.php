@@ -36,7 +36,7 @@
                     <a href="{{ $file->getUrl() }}" target="_blank">
                         <i class="bi bi-file-earmark"></i> {{ $file->file_name }}
                     </a>
-                    <span class="text-muted">{{ $file->human_readable_size }}</span>
+                    <span class="text-muted">{{ $file->getHumanReadableSize() }}</span>
                 </li>
             @endforeach
         </ul>
