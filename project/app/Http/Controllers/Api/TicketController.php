@@ -14,6 +14,11 @@ class TicketController extends Controller
         protected TicketService $ticketService
     ){}
 
+    public function index(): JsonResponse
+    {
+        return response()->json(TicketResource::collection($this->ticketService->index()));
+    }
+
     public function store(StoreTicketRequest $request): JsonResponse
     {
         try {

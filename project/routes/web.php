@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,8 +9,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect(\route('admin.tickets.index'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('tickets', TicketController::class)->except(['create', 'store']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

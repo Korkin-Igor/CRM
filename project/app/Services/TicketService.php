@@ -14,6 +14,11 @@ class TicketService
         protected TicketRepository $ticketRepository
     ){}
 
+    public function index()
+    {
+        return $this->ticketRepository->getAll();
+    }
+
     public function createTicket($data): Ticket
     {
         $customer = Customer::firstOrCreate(
