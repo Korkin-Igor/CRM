@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('theme');
             $table->text('text');
             $table->foreignId('status_id')->constrained('statuses');
+            $table->dateTime('created_at')->default(now());
             $table->dateTime('response_date')->nullable();
         });
     }

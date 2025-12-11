@@ -26,7 +26,7 @@ class TicketService
             'customer_id' => $customer->id,
             'theme' => $request->theme,
             'text' => $request->text,
-            'status' => Status::where('name', 'новый')->value('id'),
+            'status_id' => Status::where('name', 'новый')->value('id'),
         ];
         $ticket = $this->ticketRepository->create($ticketData);
 
