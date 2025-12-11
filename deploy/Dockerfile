@@ -14,6 +14,10 @@ RUN apk add --no-cache \
 
 RUN docker-php-ext-install pdo pdo_pgsql exif
 
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm@latest
+
 WORKDIR /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html
