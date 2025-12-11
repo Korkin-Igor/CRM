@@ -16,9 +16,18 @@ class TicketService
 
     public function createTicket($data): Ticket
     {
-        $customer = Customer::where('email', ($data['email'] ?? null))
-            ->orWhere('phone', ($data['phone'] ?? null))
-            ->first();
+        $customer = Customer::firstOrCreate(
+            [
+                'email' => $data['email'] ?? null,
+                'phone' => $data['phone'] ?? null,
+            ],
+            [
+                'name' => $data['name'] ?? 'Гость',
+                'email' => $data['email'] ?? null,
+                'phone' => $data['phone'] ?? null,
+            ]
+        );
+
         if (!$customer) throw new NotFoundResourceException('Клиент не найден!');
 
         $ticketData = [

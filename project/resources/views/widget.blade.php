@@ -59,7 +59,10 @@
                 try {
                     const response = await fetch('/api/tickets', {
                         method: 'POST',
-                        body: formData
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
                     });
 
                     const result = await response.json();
