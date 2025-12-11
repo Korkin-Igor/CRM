@@ -64,7 +64,7 @@
                                 {{ $ticket->status->name }}
                             </span>
                     </td>
-                    <td>{{ $ticket->created_at->format('d.m.Y H:i') }}</td>
+                    <td>{{ $ticket->created_at }}</td>
                     <td>
                         <a href="{{ route('admin.tickets.show', $ticket) }}" class="btn btn-sm btn-info">Просмотр</a>
                         <a href="{{ route('admin.tickets.edit', $ticket) }}" class="btn btn-sm btn-warning">Статус</a>

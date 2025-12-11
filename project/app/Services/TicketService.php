@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\TicketResource;
 use App\Models\Customer;
 use App\Models\Status;
 use App\Models\Ticket;
@@ -14,9 +15,15 @@ class TicketService
         protected TicketRepository $ticketRepository
     ){}
 
-    public function index()
+    public function getTicketsForAdmin(array $filters): array
     {
-        return $this->ticketRepository->getAll();
+        $tickets = TicketResource::collection(
+            $this->ticketRepository->getFilteredTickets($filters)
+        );
+
+        $statuses = Status::all();
+
+        return compact('tickets', 'statuses');
     }
 
     public function createTicket($data): Ticket

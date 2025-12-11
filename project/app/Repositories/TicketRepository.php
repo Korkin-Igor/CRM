@@ -4,13 +4,34 @@ namespace App\Repositories;
 
 use App\Models\Status;
 use App\Models\Ticket;
-use Illuminate\Database\Eloquent\Collection;
 
 class TicketRepository implements RepositoryInterface
 {
-    public function getAll(): Collection
+    public function getFilteredTickets(?array $filters, ?int $perPage = 15)
     {
-        return Ticket::all();
+        $query = Ticket::with(['customer', 'status']);
+
+        if (!empty($filters['date'])) {
+            $query->whereDate('created_at', $filters['date']);
+        }
+
+        if (!empty($filters['status'])) {
+            $query->where('status_id', $filters['status']);
+        }
+
+        if (!empty($filters['email'])) {
+            $query->whereHas('customer', function ($q) use ($filters) {
+                $q->where('email', 'like', "%{$filters['email']}%");
+            });
+        }
+
+        if (!empty($filters['phone'])) {
+            $query->whereHas('customer', function ($q) use ($filters) {
+                $q->where('phone', 'like', "%{$filters['phone']}%");
+            });
+        }
+
+        return $query->paginate($perPage);
     }
 
     public function show(int $id): ?Ticket
