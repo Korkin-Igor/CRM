@@ -14,18 +14,17 @@ class TicketService
         protected TicketRepository $ticketRepository
     ){}
 
-    public function createTicket($request): Ticket
+    public function createTicket($data): Ticket
     {
-        $customer = Customer::where('email', $request->email ?? null)
-            ->orWhere('phone', $request->phone ?? null)
+        $customer = Customer::where('email', ($data['email'] ?? null))
+            ->orWhere('phone', ($data['phone'] ?? null))
             ->first();
-
         if (!$customer) throw new NotFoundResourceException('Клиент не найден!');
 
         $ticketData = [
             'customer_id' => $customer->id,
-            'theme' => $request->theme,
-            'text' => $request->text,
+            'theme' => $data['theme'],
+            'text' => $data['text'],
             'status_id' => Status::where('name', 'новый')->value('id'),
         ];
         $ticket = $this->ticketRepository->create($ticketData);

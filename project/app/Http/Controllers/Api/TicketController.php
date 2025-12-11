@@ -16,13 +16,6 @@ class TicketController extends Controller
 
     public function store(StoreTicketRequest $request): JsonResponse
     {
-        \Log::info('Запрос на создание заявки', [
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'theme' => $request->theme,
-            'files_count' => count($request->file('file') ?? []),
-        ]);
-
         try {
             $ticket = $this->ticketService->createTicket($request->validated());
             return response()->json(new TicketResource($ticket));
