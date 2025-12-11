@@ -10,13 +10,13 @@ RUN apk add --no-cache \
     libpng-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    nodejs \
+    npm
 
 RUN docker-php-ext-install pdo pdo_pgsql exif
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm@latest
+RUN apk add --no-cache nodejs npm
 
 WORKDIR /var/www/html
 
