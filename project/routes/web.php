@@ -8,6 +8,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/widget', function () {
+    return view('widget');
+})->name('widget');
+
 Route::get('/dashboard', function () {
     return redirect(\route('admin.tickets.index'));
 })->middleware(['auth', 'verified'])->name('dashboard');
