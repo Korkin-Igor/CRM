@@ -17,9 +17,17 @@ docker compose exec app php artisan breeze:install blade
 docker compose exec app npm install
 docker compose exec app npm run build
 docker compose exec app php artisan migrate --seed
+
 ```
 
-## Проект доступен по адресу localhost
+## Возможно будут проблемы с docker-окружением, нужно будет перезапустить контейнеры
+```bash
+docker compose down
+docker compose up -d
+
+```
+
+#### Проект доступен по адресу http://localhost
 
 ### Данные для менеджера: 
 ##### email: igor@mail.com
