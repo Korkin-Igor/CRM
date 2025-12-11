@@ -24,7 +24,7 @@ class TicketController extends Controller
         ]);
 
         try {
-            $ticket = $this->ticketService->createTicket($request->validated(), $request->file('file'));
+            $ticket = $this->ticketService->createTicket($request->validated());
             return response()->json(new TicketResource($ticket));
         } catch (\Exception $e) {
             \Log::error('Ошибка при создании заявки', [

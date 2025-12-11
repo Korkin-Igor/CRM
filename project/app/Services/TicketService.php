@@ -14,10 +14,10 @@ class TicketService
         protected TicketRepository $ticketRepository
     ){}
 
-    public function createTicket($request, ?array $files = []): Ticket
+    public function createTicket($request): Ticket
     {
-        $customer = Customer::where('email', $data['email'] ?? null)
-            ->orWhere('phone', $request['phone'] ?? null)
+        $customer = Customer::where('email', $request->email ?? null)
+            ->orWhere('phone', $request->phone ?? null)
             ->first();
 
         if (!$customer) throw new NotFoundResourceException('Клиент не найден!');
@@ -30,8 +30,8 @@ class TicketService
         ];
         $ticket = $this->ticketRepository->create($ticketData);
 
-        if (!empty($files)) {
-            foreach ($files as $file) {
+        if (!empty($request->files)) {
+            foreach ($request->files as $file) {
                 $ticket->addMedia($file)->toMediaCollection('files');
             }
         }
