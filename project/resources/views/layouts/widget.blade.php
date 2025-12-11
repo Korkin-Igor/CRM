@@ -9,6 +9,11 @@
 </head>
 <body class="bg-light">
 <div class="container py-4">
+    <nav class="mb-4 text-center">
+        <a href="{{ route('welcome') }}" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-house-door"></i> На главную
+        </a>
+    </nav>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow-sm">
